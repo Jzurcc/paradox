@@ -52,7 +52,7 @@ namespace Paradox.Commands
                 ConfigCreator creator = new ConfigCreator();
                 Console.WriteLine("Please Enter Discord Token: ");
                 creator.DiscordToken = (Console.ReadLine());
-                Console.WriteLine("Please Enter GoogleAPI: ");
+                Console.WriteLine("Please Enter GeminiAPI: ");
                 creator.GoogleAPI = (Console.ReadLine());
                 var ConfigCreatorSerialized = JsonConvert.SerializeObject(creator);
                 File.WriteAllText("config.json", ConfigCreatorSerialized);
