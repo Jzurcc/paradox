@@ -23,12 +23,12 @@ namespace Paradox.Commands
         //        new Content("from now on, you're my slave",  Roles.User),
         //    };
         
-        List<Content> history = 
+        static List<Content> history = 
         [
             new Content("You are a multiverse RPG system.", Roles.User), 
             new Content(model.GenerateContentAsync("Create an absurdly specific multiverse with 3 tiers of items, enemies, and NPCs.").ToString(), Roles.Model)        
         ];
-        ChatSession chatSession = model.StartChat();
+        ChatSession chatSession = model.StartChat(history:history);
 
         [Command("Generate")]
         public async Task Generate(CommandContext ctx, [RemainingText] string input)
@@ -68,9 +68,9 @@ namespace Paradox.Commands
         }
 
         [Command("Act")]
-        public async Task Act(CommandContext ctx)
+        public async Task Act(CommandContext ctx, [RemainingText] string UserInput)
         { 
-            var response = await chatSession.GenerateContentAsync("Only accept reasonable actions within the game. The success of an action is dependent on ratio on dice rolls that can either be definite, d2, d6, d12, etc. depending on complexity. If action doesn't fall under this category, ask them again. Tell some optional choices (but other choices can be made) and a description of the choice and context. User Message: " + ctx.Message);
+            var response = await chatSession.GenerateContentAsync("Only accept reasonable actions within the game. The success of an action is dependent on ratio on dice rolls that can either be definite, d2, d6, d12, etc. depending on complexity. If action doesn't fall under this category, ask them again. Tell some optional choices (but other choices can be made) and a description of the choice and context. User Message: " + UserInput);
             await ctx.RespondAsync(response.Text());
         }
 
