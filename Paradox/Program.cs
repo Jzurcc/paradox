@@ -10,6 +10,7 @@ namespace Paradox
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Fuck Negers");
         }
     }
 }
