@@ -33,7 +33,7 @@ namespace Paradox.Commands
     public class JsonParser
     {
         static string json;
-        public static string GoogleAPI;
+        public static string GeminiAPI;
         public static string DiscordToken;
 
         public static void JsonParseChecker()
@@ -42,7 +42,7 @@ namespace Paradox.Commands
             if (File.Exists("config.json"))
             {
                 json = File.ReadAllText("config.json");
-                GoogleAPI = JObject.Parse(json)["GoogleAPI"].ToString();
+                GeminiAPI = JObject.Parse(json)["GoogleAPI"].ToString();
                 DiscordToken = JObject.Parse(json)["DiscordToken"].ToString();
 
             }
@@ -53,7 +53,7 @@ namespace Paradox.Commands
                 Console.WriteLine("Please Enter Discord Token: ");
                 creator.DiscordToken = (Console.ReadLine());
                 Console.WriteLine("Please Enter GeminiAPI: ");
-                creator.GoogleAPI = (Console.ReadLine());
+                creator.GeminiAPI = (Console.ReadLine());
                 var ConfigCreatorSerialized = JsonConvert.SerializeObject(creator);
                 File.WriteAllText("config.json", ConfigCreatorSerialized);
                 JsonParseChecker();
@@ -64,7 +64,7 @@ namespace Paradox.Commands
     public class ConfigCreator
     {
         public string DiscordToken;
-        public string GoogleAPI;
+        public string GeminiAPI;
         public string UserID;
         public string Response;
     }
