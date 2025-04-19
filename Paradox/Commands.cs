@@ -42,7 +42,7 @@ namespace Paradox.Commands
             if (File.Exists("config.json"))
             {
                 json = File.ReadAllText("config.json");
-                GeminiAPI = JObject.Parse(json)["GoogleAPI"].ToString();
+                GeminiAPI = JObject.Parse(json)["GeminiAPI"].ToString();
                 DiscordToken = JObject.Parse(json)["DiscordToken"].ToString();
 
             }
