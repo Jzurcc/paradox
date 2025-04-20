@@ -18,10 +18,6 @@ namespace Paradox.Commands
         // preload GoogleAI
         static GoogleAi googleAI = new GoogleAi(JsonParser.GeminiAPI);
         static GenerativeModel model = googleAI.CreateGenerativeModel("gemini-2.0-flash-lite");
-        //var history = new List<Content>
-        //    {
-        //        new Content("from now on, you're my slave",  Roles.User),
-        //    };
         
         List<Content> history = 
         [
@@ -60,6 +56,7 @@ namespace Paradox.Commands
             var response = await chatSession.GenerateContentAsync("Welcome the player and act like a title menu");
             await ctx.RespondAsync(response.Text());
         }
+
         [Command("Inventory")]
         public async Task Inventory(CommandContext ctx)
         {
