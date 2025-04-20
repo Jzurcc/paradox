@@ -43,7 +43,6 @@ namespace Paradox
             Commands = Client.UseCommandsNext(commandsConfig);
             Commands.RegisterCommands<Commands.Commands>();
 
-
             //Connects to the server
             try
             {
