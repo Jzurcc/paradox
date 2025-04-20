@@ -25,7 +25,7 @@ namespace Paradox.Commands
             new Content("You are a multiverse RPG system.", Roles.User), 
             new Content(model.GenerateContentAsync("Current Playthrough: Create either a medieval fantasy, cowboy, modern day, futuristic, apocalyptic, or utopian RPG multiverse world with 3 tiers of items, enemies, and NPCs, and unique gameplay mechanics and goals. Although each playthrough is different, they share the same endgame goal that is to find paradoxes (anomalies that may seem normal but don't belong in that universe). Of course, the players should still first finish quests and level up as these paradoxes are elusive. Also create a character sheet for the player. The starter stats is a randomized RPG archetype. Although it's a multiverse setting, each playthrough should read like just a normal RPG archetype.").ToString(), Roles.Model),
             new Content(model.GenerateContentAsync("Write the plot outline (must have prologue, act 1, act 2, and finale), ALL early game quests, enemy and their types, NPCs, a starting quest that includdes a tutorial for battle, gathering items, and leveling up stats. Also flesh out the world building and add  specific gameplay details (e.g., battle systems, limitations, different nature & beliefs, etc. Increase spawn rate of NPCs and enemies by a lot so there's a lot of interactibles, and also the amount of environments and places they can go, as well as quests. Just format these in bullet points. Then write the prologue. This should be detailed. Cater the multiverse to serious gameplay first, not goofy ahh multiverses. But do always remember that this is still an RPG.").ToString(), Roles.Model),
-            new Content("Use discord markup but only sparingly, with # for headers and > for quotes.", Roles.User)
+            new Content("Use discord markup but only sparingly, with # for headers and > for quotes and don't enclose ALL responses with (```)", Roles.User)
         ];
         ChatSession chatSession = model.StartChat(history:history);
 
@@ -121,7 +121,10 @@ namespace Paradox.Commands
         [Command("Inventory")]
         public async Task Inventory(CommandContext ctx)
         {
-            var response = await chatSession.GenerateContentAsync("use Discord Markups, especially > for dialogues and #, ##, and ### for headers and asterisks for bold and italics, and etc. Create a well-designed text inventory system with random starter loot (multiverse style)");
+            //Fetch the items-template.txt and uses that shi to cook up le item list. cool right?
+            var request = new GenerateContentRequest();
+            request.AddText($"Follow the template strictly. If it's a new game, create a text inventory system with random starter loot (multiverse style). Don't enclose the template in (```) and when the description reaches 30 characters, continue it on a new line. use the template provided: {Templates.Templates.ItemsTemplate()}");
+            var response = await chatSession.GenerateContentAsync(request);
             ChunkRespond(ctx, response.Text());
         }
 
