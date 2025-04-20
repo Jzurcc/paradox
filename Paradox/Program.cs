@@ -48,7 +48,7 @@ namespace Paradox
             {
                 await Client.ConnectAsync();
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("Token is invalid. Input the token again");
                 File.Delete("config.json");
