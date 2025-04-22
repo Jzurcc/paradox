@@ -77,7 +77,7 @@ namespace Paradox.Commands
         public async Task Inventory(CommandContext ctx)
         {
             //Fetch the items-template.txt and uses that shi to cook up le item list. cool right?
-            var response = await chatSession.GenerateContentAsync($"Follow the template strictly. If it's a new game, create a text inventory system with random starter loot (multiverse style). Don't enclose the template in (```) and when the description reaches 30 characters, continue it on a new line. use the template provided: {Templates.Templates.ItemsTemplate()}");
+            var response = await chatSession.GenerateContentAsync($"Follow the template strictly. If it's a new game, create a text inventory system with random starter loot (multiverse style). Don't enclose the template in (```) and when the description reaches 30 characters, continue it on a new line. Strictly use the template provided: {Templates.Templates.ItemsTemplate()}");
             messageSplitter.ChunkRespond(ctx, response.Text());
         }
 
@@ -102,6 +102,12 @@ namespace Paradox.Commands
             messageSplitter.ChunkRespond(ctx, response.Text());
         }
 
+        [Command("Stats")]
+        public async Task Stats(CommandContext ctx)
+        {
+            var response = await chatSession.GenerateContentAsync($"Follow the template strictly. If it's a new game, create a text stats system with random starter loot (multiverse style). Don't enclose the template in (```). use the template provided: {Templates.Templates.StatsTemplate()}");
+            messageSplitter.ChunkRespond(ctx, response.Text());
+        }
     }
 
     public class JsonParser
